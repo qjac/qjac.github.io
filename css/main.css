@@ -1,6 +1,8 @@
 /* Straight CSS. No compilation necessary. */
 
-/* variables */
+/*=================================================================
+				VARIABLES
+===================================================================*/
 :root {
     /* colors */
     --color-primary: #213368;
@@ -8,7 +10,7 @@
     --color-highlight1: #e2088b;
     --color-highlight2: #00b4ac;
     --color-dark: #0d1c48;
-    --color-light: #fff;
+    --color-light: #fffafa;
 
     /* fonts */
     --font-brand: 'Rockwell Std', Rockwell, 'Sanchez', Serifa, 'Serifa Std',
@@ -25,17 +27,62 @@
     --breakpoint-giant: 1920px;
 }
 
-/* resets */
-* {
+/*=================================================================
+				RESETS
+===================================================================*/
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+html,
+body {
     box-sizing: border-box;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-/* type styles */
-
-/* page styles */
+/*=================================================================
+				TYPOGRAPHY
+===================================================================*/
 body {
-    border: 2rem solid var(--color-highlight1);
     color: var(--color-primary);
-    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.2;
+    font-weight: 300;
+}
+
+a {
+    color: var(--color-dark);
+    text-decoration-skip-ink: auto;
+    &:hover,
+    &:focus,
+    &:active {
+        color: var(--color-highlight1);
+        /* outline: 0; */
+    }
+}
+
+h1 {
+    font-family: var(--font-brand);
+    font-weight: normal;
+}
+
+h2 {
+    color: var(--color-highlight1);
+    font-family: var(--font-display);
+    font-style: italic;
+}
+
+/*=================================================================
+				PAGE STYLES
+===================================================================*/
+body {
+    background: var(--color-light);
+    border: 2rem solid var(--color-highlight1);
     min-height: 100vh;
+    text-align: center;
 }
