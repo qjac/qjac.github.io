@@ -55,14 +55,29 @@ body {
     font-weight: 300;
 }
 
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0 auto;
+}
+
 a {
     color: var(--color-dark);
     text-decoration-skip-ink: auto;
+    display: inline-block;
+    min-width: 40px;
+    padding: 0.5em;
 }
 a:hover,
 a:focus,
 a:active {
     color: var(--color-highlight1);
+
+    transition: var(--hover-ease);
 }
 
 h1 {
@@ -71,14 +86,17 @@ h1 {
 }
 
 h2 {
-    color: var(--color-highlight1);
+    /* color: var(--color-bright); */
     font-family: var(--font-display);
     font-style: italic;
+    opacity: 0.6;
+    margin-top: 0;
 }
 
 /*=================================================================
                 LOGO
                 .logo is inline svg
+                .logo is hidden from aria
 ===================================================================*/
 
 .logo,
@@ -90,13 +108,18 @@ h2 {
 }
 
 .logo {
-    min-width: 6rem;
-    max-width: 12rem;
-    margin: 0;
-    margin-top: 2.25rem;
+    /* min-width: 50vw; */
+    /* max-width: 50vw; */
+    /* width: 25%;
+    margin: 0; */
+    /* margin-top: 2.25rem; */
     padding: 0.25rem 0.25em;
-    width: 15%;
-    transform: translate(20vw, 0);
+    /* width: 25%;*/
+    /* transform: translate(99%, -75%); */
+    z-index: -1;
+    position: absolute;
+    /* right: 0; */
+    /* top: -50%;  */
 }
 
 .logo:hover path.logo-dot,
@@ -106,11 +129,49 @@ h2 {
 }
 
 /*=================================================================
-				PAGE STYLES
+                PAGE STYLES 
+                layout & backgrounds
 ===================================================================*/
 body {
     background: var(--color-light);
     border: 2rem solid var(--color-highlight1);
     min-height: 100vh;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.main-content-container {
+    /* for better visual vertical centering */
+    margin-bottom: 5vh;
+    display: grid;
+    grid-template-columns: 1rem 1fr 1fr 1fr 1rem;
+    gap: 1rem;
+    justify-content: center;
+    align-content: center;
+    grid-template-areas:
+        /* ' . .... .... logo logo ' */
+        ' . name name name . '
+        ' . focus focus focus . '
+        ' . links links links . ';
+}
+
+.logo {
+    width: 33vw;
+    position: absolute;
+    top: 20vh;
+    right: 10vw;
+    opacity: 0.8;
+}
+
+.name {
+    grid-area: name;
+    align-self: end;
+}
+.focus {
+    grid-area: focus;
+}
+.link-container {
+    grid-area: links;
 }
