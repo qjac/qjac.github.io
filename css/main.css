@@ -12,6 +12,8 @@
     --color-dark: #0d1c48;
     --color-light: #fffafa;
 
+    --color-logo: var(--color-bright);
+
     /* fonts */
     --font-brand: 'Rockwell Std', Rockwell, 'Sanchez', Serifa, 'Serifa Std',
         Glypha, 'Glypha Std', Memphis, 'Memphis Std', serif;
@@ -21,10 +23,12 @@
     /*animations*/
     --hover-ease: all 1s cubic-bezier(0.21, 0.61, 0.35, 1);
 
-    /*breakpoints*/
-    --breakpoint-md: 40em;
+    /*breakpoints
+     NOTE: cannot be used in media query declaration, but kept here for reference
+    */
+    /* --breakpoint-md: 40em;
     --breakpoint-lg: 1200px;
-    --breakpoint-giant: 1920px;
+    --breakpoint-giant: 1920px; */
 }
 
 /*=================================================================
@@ -36,6 +40,7 @@
 *:after {
     box-sizing: inherit;
 }
+
 html,
 body {
     box-sizing: border-box;
@@ -62,7 +67,7 @@ h2,
 h3,
 h4,
 h5 {
-    margin: 0 auto;
+    margin: 0;
 }
 
 a {
@@ -73,7 +78,6 @@ a {
     padding: 0.5em;
     transition: var(--hover-ease);
 }
-
 a:hover,
 a:focus,
 a:active {
@@ -82,12 +86,12 @@ a:active {
 
 h1 {
     font-family: var(--font-brand);
-    font-weight: normal;
+    font-weight: lighter;
 }
 
 h2 {
     font-family: var(--font-brand);
-    font-weight: normal;
+    font-weight: lighter;
     font-style: italic;
     opacity: 0.8;
 }
@@ -102,11 +106,8 @@ h2 {
 .logo-j,
 .logo-q,
 .logo-dot {
+    /* fill: var(--color-bright); */
     transition: var(--hover-ease);
-}
-
-.logo {
-    padding: 0.25rem 0.25em;
 }
 
 .logo:hover .logo-dot,
@@ -131,35 +132,54 @@ body {
 
 .main-content-container {
     /* for better visual vertical centering */
-    margin-bottom: calc(0.1 * 20vw);
+    margin-bottom: 8vh;
     background: var(--color-light);
-    padding: 2vw;
-    display: grid;
-    grid-template-columns: 1rem 1fr 1fr 1fr 1rem;
-    gap: 1rem;
-    justify-content: center;
-    align-content: center;
-    grid-template-areas:
-        /* ' . .... .... logo logo ' */
-        ' . name name name . '
-        ' . focus focus focus . '
-        ' . links links links . ';
+    padding: 4vw;
+}
+
+@media screen and (min-width: 40em) {
+    .main-content-container {
+        display: grid;
+        /* grid-template-columns: 1fr auto; */
+        gap: 1rem;
+        justify-items: start;
+        align-items: start;
+        justify-content: center;
+        align-content: center;
+        grid-template-areas:
+            ' logo  .  '
+            '  .  name  '
+            '  .  focus  '
+            '  .  links ';
+    }
 }
 
 .logo {
-    /* width: 33vw;
-    position: absolute;
-    top: 20vh;
-    right: 10vw; */
+    /* wacky margins for some off-kilter flair */
+    margin: 6vh 12vw 6vh 2vw;
+    width: 50%;
+    max-width: 120px;
+}
+@media screen and (min-width: 40em) {
+    .logo {
+        grid-area: logo;
+        margin: 6vh 4vw 3vh 3vw;
+    }
+}
+@media screen and (min-width: 1920px) {
+    .logo {
+        max-width: 10vw;
+    }
 }
 
 .name {
     grid-area: name;
-    align-self: end;
 }
+
 .focus {
     grid-area: focus;
 }
+
 .link-container {
     grid-area: links;
 }
