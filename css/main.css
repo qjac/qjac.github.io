@@ -4,29 +4,29 @@
 				VARIABLES
 ===================================================================*/
 :root {
-    /* colors */
-    --color-primary: #213368;
-    --color-bright: #d6df23;
-    --color-highlight1: #e2088b;
-    --color-highlight2: #00b4ac;
-    --color-dark: #0d1c48;
-    --color-light: #fffafa;
+  /* colors */
+  --color-primary: #213368;
+  --color-bright: #d6df23;
+  --color-highlight1: #e2088b;
+  --color-highlight2: #00b4ac;
+  --color-dark: #0d1c48;
+  --color-light: #fffaf0;
 
-    --color-logo: var(--color-bright);
+  --color-logo: var(--color-bright);
 
-    /* fonts */
-    --font-brand: 'Rockwell Std', Rockwell, 'Sanchez', Serifa, 'Serifa Std',
-        Glypha, 'Glypha Std', Memphis, 'Memphis Std', serif;
-    --font-display: 'Playfair Display', --font-brand;
-    --font-body: 'Yantramanav', sans-serif;
+  /* fonts */
+  --font-brand: "Rockwell Std", Rockwell, "Sanchez", Serifa, "Serifa Std",
+    Glypha, "Glypha Std", Memphis, "Memphis Std", serif;
+  --font-display: "Playfair Display", --font-brand;
+  --font-body: "Yantramanav", sans-serif;
 
-    /*animations*/
-    --hover-ease: all 1s cubic-bezier(0.21, 0.61, 0.35, 1);
+  /*animations*/
+  --hover-ease: all 1s cubic-bezier(0.21, 0.61, 0.35, 1);
 
-    /*breakpoints
+  /*breakpoints
      NOTE: cannot be used in media query declaration, but kept here for reference
     */
-    /* --breakpoint-md: 40em;
+  /* --breakpoint-md: 40em;
     --breakpoint-lg: 1200px;
     --breakpoint-giant: 1920px; */
 }
@@ -38,26 +38,26 @@
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html,
 body {
-    box-sizing: border-box;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /*=================================================================
 				TYPOGRAPHY
 ===================================================================*/
-body {
-    color: var(--color-primary);
-    font-family: var(--font-body);
-    font-size: 1.1rem;
-    line-height: 1.2;
-    font-weight: 300;
+html {
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.2;
+  font-weight: 300;
 }
 
 a,
@@ -67,33 +67,91 @@ h2,
 h3,
 h4,
 h5 {
-    margin: 0;
+  margin: 0;
 }
 
 a {
-    color: var(--color-dark);
-    text-decoration-skip-ink: auto;
-    display: inline-block;
-    min-width: 40px;
-    padding: 0.5em;
-    transition: var(--hover-ease);
+  color: var(--color-dark);
+  transition: var(--hover-ease);
 }
+
 a:hover,
 a:focus,
 a:active {
-    color: var(--color-highlight1);
+  color: var(--color-highlight1);
 }
 
 h1 {
-    font-family: var(--font-brand);
-    font-weight: lighter;
+  font-family: var(--font-brand);
+  font-weight: lighter;
 }
 
 h2 {
-    font-family: var(--font-brand);
-    font-weight: lighter;
-    font-style: italic;
-    opacity: 0.8;
+  font-family: var(--font-brand);
+  font-weight: lighter;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/*=================================================================
+                Fancy Links 
+===================================================================*/
+
+.link-item {
+  text-decoration: none;
+  display: inline-flex;
+  position: relative;
+  padding: 0.5em 0.5em 1px;
+}
+
+.link-item:first-of-type {
+  margin-left: -0.5em;
+}
+
+.link-item:after {
+  content: "";
+  background: var(--color-bright);
+  opacity: 80%;
+  height: 3px;
+  width: 40%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transition: var(--hover-ease);
+  mix-blend-mode: multiply;
+}
+
+.link-item:focus {
+  color: var(--color-dark);
+}
+.link-item:focus:after {
+  background: var(--color-highlight1);
+  width: 100%;
+  height: 3px;
+}
+
+@media not all and (pointer: coarse) {
+  .link-item:hover {
+    color: var(--color-dark);
+  }
+  .link-item:hover:after {
+    height: 60%;
+    width: 100%;
+    bottom: 3px;
+    z-index: 0;
+  }
+}
+
+.link-item:active {
+  color: var(--color-dark);
+}
+.link-item:active:after {
+  background: var(--color-highlight1);
+  height: 60%;
+  width: 100%;
+  bottom: 3px;
 }
 
 /*=================================================================
@@ -106,14 +164,13 @@ h2 {
 .logo-j,
 .logo-q,
 .logo-dot {
-    /* fill: var(--color-bright); */
-    transition: var(--hover-ease);
+  transition: var(--hover-ease);
 }
 
 .logo:hover .logo-dot,
 .logo:focus .logo-dot,
 .logo:active .logo-dot {
-    fill: var(--color-highlight1);
+  fill: var(--color-highlight1);
 }
 
 /*=================================================================
@@ -121,65 +178,65 @@ h2 {
                 layout & backgrounds
 ===================================================================*/
 body {
-    background: var(--color-highlight1);
-    border: 2rem solid var(--color-highlight1);
-    min-height: 100vh;
-    text-align: center;
-    display: grid;
-    justify-content: center;
-    align-content: center;
+  background: var(--color-primary);
+  border: 2rem solid var(--color-primary);
+  min-height: 100vh;
+  text-align: center;
+  display: grid;
+  justify-content: center;
+  align-content: center;
 }
 
 .main-content-container {
-    /* for better visual vertical centering */
-    margin-bottom: 8vh;
-    background: var(--color-light);
-    padding: 4vw;
+  /* for better visual vertical centering */
+  margin-bottom: 8vh;
+  background: var(--color-light);
+  padding: 4vw;
 }
 
 @media screen and (min-width: 40em) {
-    .main-content-container {
-        display: grid;
-        /* grid-template-columns: 1fr auto; */
-        gap: 1rem;
-        justify-items: start;
-        align-items: start;
-        justify-content: center;
-        align-content: center;
-        grid-template-areas:
-            ' logo  .  '
-            '  .  name  '
-            '  .  focus  '
-            '  .  links ';
-    }
+  .main-content-container {
+    display: grid;
+    /* grid-template-columns: 1fr auto; */
+    gap: 0 1rem;
+    justify-items: start;
+    align-items: start;
+    justify-content: center;
+    align-content: center;
+    grid-template-areas:
+      " logo  .  "
+      "  .  name  "
+      "  .  focus  "
+      "  .  links ";
+  }
 }
 
 .logo {
-    /* wacky margins for some off-kilter flair */
-    margin: 6vh 12vw 6vh 2vw;
-    width: 50%;
-    max-width: 120px;
+  /* wacky margins for some off-kilter flair */
+  margin: 6vh 12vw 6vh 2vw;
+  width: 50%;
+  max-width: 120px;
 }
 @media screen and (min-width: 40em) {
-    .logo {
-        grid-area: logo;
-        margin: 6vh 4vw 3vh 3vw;
-    }
+  .logo {
+    grid-area: logo;
+    margin: 6vh 4vw 3vh 3vw;
+  }
 }
 @media screen and (min-width: 1920px) {
-    .logo {
-        max-width: 10vw;
-    }
+  .logo {
+    max-width: 10vw;
+  }
 }
 
 .name {
-    grid-area: name;
+  grid-area: name;
 }
 
 .focus {
-    grid-area: focus;
+  grid-area: focus;
 }
 
 .link-container {
-    grid-area: links;
+  grid-area: links;
 }
