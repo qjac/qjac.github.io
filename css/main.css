@@ -132,14 +132,16 @@ h2 {
   height: 3px;
 }
 
-.link-item:hover {
-  color: var(--color-dark);
-}
-.link-item:hover:after {
-  height: 60%;
-  width: 100%;
-  bottom: 3px;
-  z-index: 0;
+@media not all and (pointer: coarse) {
+  .link-item:hover {
+    color: var(--color-dark);
+  }
+  .link-item:hover:after {
+    height: 60%;
+    width: 100%;
+    bottom: 3px;
+    z-index: 0;
+  }
 }
 
 .link-item:active {
