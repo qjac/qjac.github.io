@@ -111,6 +111,7 @@ h2 {
 .link-item:after {
   content: "";
   background: var(--color-bright);
+  border: 0 solid transparent;
   opacity: 80%;
   height: 3px;
   width: 40%;
@@ -127,31 +128,29 @@ h2 {
   color: var(--color-dark);
 }
 .link-item:focus:after {
-  background: var(--color-highlight1);
+  background: var(--color-light);
+  border: 2px solid var(--color-highlight1);
+  height: 70%;
   width: 100%;
-  height: 3px;
 }
 
 @media not all and (pointer: coarse) {
   .link-item:hover {
-    color: var(--color-dark);
+    /* color: var(--color-dark); */
   }
   .link-item:hover:after {
-    height: 60%;
+    height: 70%;
     width: 100%;
-    bottom: 3px;
-    z-index: 0;
   }
 }
 
 .link-item:active {
-  color: var(--color-dark);
+  /* color: var(--color-primary); */
 }
 .link-item:active:after {
   background: var(--color-highlight1);
-  height: 60%;
   width: 100%;
-  bottom: 3px;
+  height: 3px;
 }
 
 /*=================================================================
@@ -187,15 +186,12 @@ body {
 .background-decor {
   background: var(--color-primary);
   /* background: conic-gradient(from 0deg at 0% 0%, blue, green, yellow 180deg); */
-  background:  radial-gradient(
+  background: radial-gradient(
     circle at top right,
-    
-    var(--color-bright)  ,
+    var(--color-bright),
     var(--color-highlight1),
-      var(--color-highlight2) 97%
- /* var(--color-highlight2)  */
-      );;
-  /* border: 2rem solid var(--color-primary); */
+    var(--color-highlight2) 97%
+  );
 }
 .main-content-container {
   /* for better visual vertical centering */
