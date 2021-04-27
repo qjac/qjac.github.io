@@ -185,7 +185,9 @@ body {
 }
 .background-decor {
   background: var(--color-primary);
-  /* background: conic-gradient(from 0deg at 0% 0%, blue, green, yellow 180deg); */
+  /* background: conic-gradient(from 36deg, var(--color-bright),
+  var(--color-highlight2), 
+  var(--color-highlight1), var(--color-bright)); */
   background: radial-gradient(
     circle at top right,
     var(--color-bright),
