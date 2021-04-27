@@ -178,20 +178,31 @@ h2 {
                 layout & backgrounds
 ===================================================================*/
 body {
-  background: var(--color-primary);
-  border: 2rem solid var(--color-primary);
   min-height: 100vh;
   text-align: center;
   display: grid;
   justify-content: center;
   align-content: center;
 }
-
+.background-decor {
+  background: var(--color-primary);
+  /* background: conic-gradient(from 0deg at 0% 0%, blue, green, yellow 180deg); */
+  background:  radial-gradient(
+    circle at top right,
+    
+    var(--color-bright)  ,
+    var(--color-highlight1),
+      var(--color-highlight2) 97%
+ /* var(--color-highlight2)  */
+      );;
+  /* border: 2rem solid var(--color-primary); */
+}
 .main-content-container {
   /* for better visual vertical centering */
   margin-bottom: 8vh;
   background: var(--color-light);
   padding: 4vw;
+  border: 4px solid var(--color-highlight1);
 }
 
 @media screen and (min-width: 40em) {
