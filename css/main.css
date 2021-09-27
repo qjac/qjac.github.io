@@ -4,6 +4,8 @@
 				VARIABLES
 ===================================================================*/
 :root {
+  -color-mode: 'bright';
+
   /* colors */
   --color-primary: #213368;
   --color-bright: #d6df23;
@@ -12,19 +14,36 @@
   --color-dark: #0d1c48;
   --color-light: #fffaf0;
 
+  /* color scaffolding */
+  --page-background: radial-gradient(
+    circle at top right,
+    var(--color-bright),
+    var(--color-highlight1),
+    var(--color-highlight2) 97%
+  );
+  --content-background: var(--color-light);
+  --content-border: var(--color-highlight1);
+  --text-color: var(--color-dark);
+  --link-background: var(--color-bright);
+  --link-background-focus: var(--color-highlight1);
   --color-logo: var(--color-bright);
+  --button-background: var(--color-primary);
+  --button-color: var(--color-light);
+  --border-color: var(--color-dark);
+  --button-background-hover: var(--color-dark);
+  --button-border-focus: var(--color-bright);
 
   /* fonts */
-  --font-brand: "Rockwell Std", Rockwell, "Sanchez", Serifa, "Serifa Std",
-    Glypha, "Glypha Std", Memphis, "Memphis Std", serif;
-  --font-display: "Playfair Display", --font-brand;
-  --font-body: "Yantramanav", sans-serif;
+  --font-brand: 'Rockwell Std', Rockwell, 'Sanchez', Serifa, 'Serifa Std', Glypha, 'Glypha Std',
+    Memphis, 'Memphis Std', serif;
+  --font-display: 'Playfair Display', --font-brand;
+  --font-body: 'Yantramanav', sans-serif;
 
   /*animations*/
   --hover-ease: all 1s cubic-bezier(0.21, 0.61, 0.35, 1);
 
   /*breakpoints
-     NOTE: cannot be used in media query declaration, but kept here for reference
+     NOTE: cannot be used in media query declaration , but kept here for reference
     */
   /* --breakpoint-md: 40em;
     --breakpoint-lg: 1200px;
@@ -32,9 +51,52 @@
 }
 
 /*=================================================================
-				RESETS
+        VARIABLES: Dark mode 
 ===================================================================*/
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-mode: 'dark';
+  }
 
+  :root:not([data-user-color-scheme]) {
+    --page-background: radial-gradient(
+      circle at top right,
+      var(--color-highlight2),
+      var(--color-primary),
+      var(--color-dark),
+      var(--color-highlight1)
+    );
+    --text-color: var(--color-light);
+    --content-background: var(--color-primary);
+    --button-background: var(--color-light);
+    --button-color: var(--color-dark);
+    --border-color: var(--color-bright);
+    --button-background-hover: var(--color-bright);
+    --button-border-focus: var(--color-highlight1);
+  }
+}
+
+[data-user-color-scheme='dark'] {
+  /* repeat everything in :root:not([data-user-color-scheme]). only need to repeat here, hence no need for mixin/compiling */
+  --page-background: radial-gradient(
+    circle at top right,
+    var(--color-highlight2),
+    var(--color-primary),
+    var(--color-dark),
+    var(--color-highlight1)
+  );
+  --text-color: var(--color-light);
+  --content-background: var(--color-primary);
+  --button-background: var(--color-light);
+  --button-color: var(--color-dark);
+  --border-color: var(--color-bright);
+  --button-background-hover: var(--color-bright);
+  --button-border-focus: var(--color-highlight1);
+}
+
+/*=================================================================
+				RESETS & UTILITIES
+===================================================================*/
 *,
 *:before,
 *:after {
@@ -49,11 +111,23 @@ body {
   padding: 0;
 }
 
+.visually-hidden {
+  display: block;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(1px);
+  white-space: nowrap;
+  position: absolute;
+}
+
 /*=================================================================
 				TYPOGRAPHY
 ===================================================================*/
 html {
-  color: var(--color-primary);
+  color: var(--text-color);
   font-family: var(--font-body);
   font-size: 1.1rem;
   line-height: 1.2;
@@ -71,7 +145,7 @@ h5 {
 }
 
 a {
-  color: var(--color-dark);
+  color: var(--text-color);
   transition: var(--hover-ease);
 }
 
@@ -94,14 +168,38 @@ h2 {
 }
 
 /*=================================================================
+                Button 
+===================================================================*/
+button {
+  background: var(--button-background);
+  color: var(--button-color);
+  border-color: var(--border-color);
+  padding: 0.5rem 1rem;
+  min-width: 40px;
+  transition: var(--hover-ease);
+}
+
+@media (hover: hover) {
+  button:hover {
+    background: var(--button-background-hover);
+  }
+}
+
+button:focus,
+button:active {
+  background: var(--button-background-hover);
+  border-color: var(--button-border-focus);
+}
+
+/*=================================================================
                 Fancy Links 
 ===================================================================*/
-
 .link-item {
   text-decoration: none;
   display: inline-flex;
   position: relative;
   padding: 0.5em 0.5em 1px;
+  z-index: 1;
 }
 
 .link-item:first-of-type {
@@ -109,8 +207,8 @@ h2 {
 }
 
 .link-item:after {
-  content: "";
-  background: var(--color-bright);
+  content: '';
+  background: var(--link-background);
   border: 0 solid transparent;
   opacity: 80%;
   height: 3px;
@@ -121,32 +219,21 @@ h2 {
   right: 0;
   margin: auto;
   transition: var(--hover-ease);
-  mix-blend-mode: multiply;
+  z-index: -1;
 }
 
-.link-item:focus {
-  color: var(--color-dark);
-}
 .link-item:focus:after {
-  background: var(--color-light);
-  border: 2px solid var(--color-highlight1);
-  height: 70%;
+  background: var(--link-background-focus);
   width: 100%;
 }
 
 @media not all and (pointer: coarse) {
-  .link-item:hover {
-    /* color: var(--color-dark); */
-  }
   .link-item:hover:after {
-    height: 70%;
+    height: 1.3em;
     width: 100%;
   }
 }
 
-.link-item:active {
-  /* color: var(--color-primary); */
-}
 .link-item:active:after {
   background: var(--color-highlight1);
   width: 100%;
@@ -158,7 +245,6 @@ h2 {
                 .logo is inline svg
                 .logo is hidden from aria
 ===================================================================*/
-
 .logo,
 .logo-j,
 .logo-q,
@@ -185,36 +271,29 @@ body {
 }
 .background-decor {
   background: var(--color-primary);
-  /* background: conic-gradient(from 0deg at 0% 0%, blue, green, yellow 180deg); */
-  background: radial-gradient(
-    circle at top right,
-    var(--color-bright),
-    var(--color-highlight1),
-    var(--color-highlight2) 97%
-  );
+  background: var(--page-background);
 }
 .main-content-container {
   /* for better visual vertical centering */
   margin-bottom: 8vh;
-  background: var(--color-light);
+  background: var(--content-background);
   padding: 4vw;
-  border: 4px solid var(--color-highlight1);
+  border: 4px solid var(--content-border);
 }
 
 @media screen and (min-width: 40em) {
   .main-content-container {
     display: grid;
-    /* grid-template-columns: 1fr auto; */
     gap: 0 1rem;
     justify-items: start;
     align-items: start;
     justify-content: center;
     align-content: center;
     grid-template-areas:
-      " logo  .  "
-      "  .  name  "
-      "  .  focus  "
-      "  .  links ";
+      ' logo  .  '
+      '  .  name  '
+      '  .  focus  '
+      '  .  links ';
   }
 }
 
