@@ -19,13 +19,43 @@ window.onload = function () {
     if (response.length) {
       response = response.replace(/\"/g, '').trim();
     }
-
     return response;
   };
 
-  const applySetting = (passedSetting) => {
-    let currentSetting = passedSetting || localStorage.getItem(STORAGE_KEY);
+  const getCurrentSetting = (passedSetting) => {
+    // let currentSetting = passedSetting || localStorage.getItem(STORAGE_KEY);
 
+    // TODO: Add option to grab default user setting (passed Setting and local storage setting to overide)
+
+    let currentSetting = 'light'; //default
+
+    if (passedSetting) {
+      currentSetting = passedSetting;
+      console.log('passed: ' + currentSetting);
+      //   return currentSetting;
+    } else if (localStorage.getItem(STORAGE_KEY)) {
+      currentSetting = localStorage.getItem(STORAGE_KEY);
+      console.log('local storage: ' + currentSetting);
+      //   return currentSetting;
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      currentSetting = 'dark';
+      console.log('matchMedia: ' + currentSetting);
+      //
+    } else {
+      currentSetting = 'light'; //default
+    }
+
+    console.log('currentSetting: ' + currentSetting);
+    // if there is a passedSetting, set curentSetting to that
+    // else if there is a setting in local, set current to that
+    // else use matchMedia setting
+    // else default to 'light'
+
+    // return currentSetting;
+    applySetting();
+  };
+
+  const applySetting = (currentSetting) => {
     if (currentSetting) {
       document.documentElement.setAttribute('data-user-color-scheme', currentSetting);
       setButtonLabelAndStatus(currentSetting);
@@ -40,8 +70,8 @@ window.onload = function () {
     modeStatusElement.innerText = `Color mode is now "${currentSetting}"`;
   };
 
-  const toggleSetting = () => {
-    let currentSetting = localStorage.getItem(STORAGE_KEY);
+  const toggleSetting = (currentSetting) => {
+    // let currentSetting = localStorage.getItem(STORAGE_KEY);
 
     switch (currentSetting) {
       case null:
@@ -58,13 +88,37 @@ window.onload = function () {
     }
 
     localStorage.setItem(STORAGE_KEY, currentSetting);
-    console.log(currentSetting);
 
-    return currentSetting;
+    return passedSetting;
   };
+
   colorModeToggleButton.addEventListener('click', (e) => {
     e.preventDefault();
-    applySetting(toggleSetting()); // update color mode after user clicks
+    getCurrentSetting(toggleSetting()); // update color mode after user clicks
   });
-  applySetting(); // run on page load to show user selected mode
+
+  const changeMode = (e) => {
+    console.log('mode changed');
+
+    if (e.matches) {
+      console.log('dark mode is enabled');
+    } else {
+      console.log('dark mode is disabled');
+    }
+  };
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (e.matches) {
+      console.log('dark mode is enabled');
+      //   getCurrentSetting('dark');
+      currentSetting = 'dark';
+    } else {
+      console.log('dark mode is disabled');
+      currentSetting = 'light';
+    }
+
+    getCurrentSetting();
+  });
+
+  getCurrentSetting(); // run on page load to show user selected mode
 }; // end onload fn

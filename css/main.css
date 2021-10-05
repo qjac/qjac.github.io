@@ -223,14 +223,14 @@ button:active {
 }
 
 .toggle-button {
-  /* display: inline-flex;
+  display: inline-flex;
   background: var(--button-background);
   color: var(--button-color);
   border: none;
   font: inherit;
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
-  transition: background 500ms ease-in-out, color 200ms ease; */
+  transition: background 500ms ease-in-out, color 200ms ease;
 }
 
 .toggle-button__icon {
